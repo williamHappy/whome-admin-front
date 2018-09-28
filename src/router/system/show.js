@@ -10,8 +10,9 @@ export default {
   meta: { title: '展示页', icon: 'example' },
   children: [{
     path: 'index',
-    name: '首页',
+    name: '系统首页',
     icon: 'reorder',
+    meta: { title: '展示页', icon: 'example' },
     component: System.Show
   }]
 }

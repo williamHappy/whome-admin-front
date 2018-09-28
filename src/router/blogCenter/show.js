@@ -11,8 +11,9 @@ export default {
   meta: { title: '展示页', icon: 'example' },
   children: [{
     path: 'index',
-    name: '首页',
+    name: '博客首页',
     icon: 'reorder',
+    meta: { title: '展示页', icon: 'example' },
     component: Blog.Show
   }]
 }

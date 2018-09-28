@@ -10,16 +10,21 @@
         <!-- 模块分类 -->
         <el-col :span="16">
           <el-menu
-            :default-active="1"
+            :default-active="`/system/user/edit`"
             class="el-menu-demo"
             mode="horizontal"
             background-color="#324057"
             text-color="#fff"
-            active-text-color="#ffd04b">
-            <el-menu-item index="1">处理中心</el-menu-item>
-            <el-menu-item index="2">数据中心</el-menu-item>
-            <el-menu-item index="3">监控中心</el-menu-item>
-            <el-menu-item index="4">管理中心</el-menu-item>
+            active-text-color="#ffd04b"
+            unique-opened
+            router>
+            <el-menu-item
+              v-for="route in $router.options.routes"
+              v-if="!route.hidden"
+              :index="route.path"
+              :key="route.path">
+              {{ route.name }}
+            </el-menu-item>
           </el-menu>
         </el-col>
 

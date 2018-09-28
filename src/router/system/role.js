@@ -13,6 +13,7 @@ export default {
     path: 'index',
     name: '角色管理',
     icon: 'reorder',
+    meta: { title: '角色管理', icon: 'example' },
     component: System.Role
   }]
 }

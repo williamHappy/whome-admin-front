@@ -33,7 +33,7 @@ export const constantRouterMap = [
     component: Layout,
     redirect: '/dashboard',
     name: 'Dashboard',
-    hidden: true,
+    // hidden: true,
     children: [{
       path: 'dashboard',
       component: () => import('@/views/dashboard/index')
