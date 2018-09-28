@@ -1,13 +1,13 @@
+import { Sidebar } from '@/views/layout/components'
 
-import { Home } from 'layout/'
-
-import { System } from 'views'
+import { System } from '@/views'
 
 export default {
   path: 'show',
   icon: 'inbox',
-  component: Home,
+  component: Sidebar,
   redirect: '/system/show/index',
+  meta: { title: '展示页', icon: 'example' },
   children: [{
     path: 'index',
     name: '首页',

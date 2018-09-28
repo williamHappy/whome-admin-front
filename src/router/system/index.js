@@ -1,5 +1,5 @@
 
-import { Home } from 'layout/'
+import { HeaderNav } from '@/views/layout/components'
 
 import show from './show'
 import Menu from './menu'
@@ -10,7 +10,8 @@ export default {
   path: 'system',
   name: '系统中心',
   icon: 'inbox',
-  component: Home,
+  component: HeaderNav,
   redirect: '/system/show',
+  meta: { title: '系统中心', icon: 'example' },
   children: [show, Menu, Role, User]
 }

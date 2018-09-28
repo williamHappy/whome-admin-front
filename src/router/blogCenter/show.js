@@ -1,13 +1,14 @@
 
-import { Home } from 'layout/'
+import { Sidebar } from '@/views/layout/components'
 
-import { Blog } from 'views'
+import { Blog } from '@/views'
 
 export default {
   path: 'show',
   icon: 'inbox',
-  component: Home,
+  component: Sidebar,
   redirect: '/blog/show/index',
+  meta: { title: '展示页', icon: 'example' },
   children: [{
     path: 'index',
     name: '首页',

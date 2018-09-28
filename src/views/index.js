@@ -1,6 +1,6 @@
 import Login from './login/'
 import Blog from './blog/'
-import System from './system'
+import System from './system/'
 
 export {
   Login,

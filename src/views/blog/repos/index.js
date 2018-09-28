@@ -1,7 +1,7 @@
 import Edit from './edit'
-import Detail from './detail'
+import Details from './details'
 
 export default {
   Edit,
-  Detail
+  Details
 }
