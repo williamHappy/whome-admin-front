@@ -1,12 +1,12 @@
 
-import { Sidebar } from '@/views/layout/components'
+import { AppMain } from '@/views/layout/components'
 
 import { System } from '@/views'
 
 export default {
   path: 'user',
   icon: 'inbox',
-  component: Sidebar,
+  component: AppMain,
   redirect: '/system/user/list',
   meta: { title: '用户管理', icon: 'example' },
   children: [{

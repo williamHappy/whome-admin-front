@@ -91,7 +91,9 @@ export default {
       if (this.isExternalLink(routePath)) {
         return routePath
       }
-      return path.resolve(this.basePath, routePath)
+      var basePath = this.$store.state.router.headerCurRouter + '/' + this.basePath
+      console.log(path.resolve(basePath, routePath))
+      return path.resolve(basePath, routePath)
     },
     isExternalLink(routePath) {
       return validateURL(routePath)

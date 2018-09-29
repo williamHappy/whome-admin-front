@@ -10,7 +10,7 @@
         <!-- 模块分类 -->
         <el-col :span="16">
           <el-menu
-            :default-active="`/system/user/edit`"
+            :default-active="$store.state.router.headerCurRouter || `/`"
             class="el-menu-demo"
             mode="horizontal"
             background-color="#324057"
@@ -37,8 +37,6 @@
 </template>
 
 <script>
-// import HeadNavJs from './HeadNav.js'
-
 export default {
   name: 'HeaderNav',
   mounted() {

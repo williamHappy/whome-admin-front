@@ -22,6 +22,7 @@ export default {
       return validateURL(routePath)
     },
     linkProps(url) {
+      // url = this.$store.state.router.headerCurRouter + url
       if (this.isExternalLink(url)) {
         return {
           is: 'a',

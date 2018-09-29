@@ -1,12 +1,12 @@
 
-import { Sidebar } from '@/views/layout/components'
+import { AppMain } from '@/views/layout/components'
 
 import { System } from '@/views'
 
 export default {
   path: 'role',
   icon: 'inbox',
-  component: Sidebar,
+  component: AppMain,
   redirect: '/system/role/index',
   meta: { title: '角色管理', icon: 'example' },
   children: [{

@@ -1,12 +1,12 @@
 
-import { Sidebar } from '@/views/layout/components'
+import { AppMain } from '@/views/layout/components'
 
 import { System } from '@/views'
 
 export default {
   path: 'menu',
   icon: 'inbox',
-  component: Sidebar,
+  component: AppMain,
   redirect: '/system/menu/index',
   meta: { title: '菜单管理', icon: 'example' },
   children: [{

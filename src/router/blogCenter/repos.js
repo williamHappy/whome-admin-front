@@ -1,12 +1,12 @@
 
-import { Sidebar } from '@/views/layout/components'
+import { AppMain } from '@/views/layout/components'
 
 import { Blog } from '@/views'
 
 export default {
   path: 'repos',
   icon: 'inbox',
-  component: Sidebar,
+  component: AppMain,
   redirect: '/blog/repos/details',
   meta: { title: '仓库', icon: 'example' },
   children: [{
