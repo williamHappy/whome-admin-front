@@ -92,7 +92,7 @@ export default {
         return routePath
       }
       var basePath = this.$store.state.router.headerCurRouter + '/' + this.basePath
-      console.log(path.resolve(basePath, routePath))
+      // console.log(path.resolve(basePath, routePath))
       return path.resolve(basePath, routePath)
     },
     isExternalLink(routePath) {

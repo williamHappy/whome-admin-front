@@ -4,7 +4,12 @@
       <el-row>
         <!-- logo -->
         <el-col :span="4" class="logo-container">
-          <img :src="require('@/assets/logo_sm.png')" class="logo" alt="">
+          <router-link to="/">
+            <img
+              :src="require('@/assets/logo_sm.png')"
+              class="logo"
+              alt="">
+          </router-link>
         </el-col>
 
         <!-- 模块分类 -->
@@ -22,8 +27,8 @@
               v-for="route in $router.options.routes"
               v-if="!route.hidden"
               :index="route.path"
-              :key="route.path">
-              {{ route.name }}
+              :key="route.name">
+              {{ route.meta.title }}
             </el-menu-item>
           </el-menu>
         </el-col>
@@ -43,7 +48,10 @@ export default {
     // this.setDialogInfo('access');
     // this.onGetSetting();
   },
-  methods: {}
+  created() {
+  },
+  methods: {
+  }
 }
 </script>
 

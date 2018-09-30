@@ -29,6 +29,7 @@ export default {
     routes() {
       var child_routes = []
       var route = this.$route
+      // console.log(route)
       if (route.matched.length) {
         var rootPath = route.matched[0].path
         var fullPath = route.path

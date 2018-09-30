@@ -9,8 +9,10 @@ Vue.use(Router)
 /* Layout */
 import Layout from '../views/layout/Layout'
 
-import BlogCenter from './blogCenter'
-import System from './system'
+import { AppMain } from '@/views/layout/components'
+
+import System from './modules/system'
+import BlogCenter from './modules/blogCenter'
 
 /**
 * hidden: true                   if `hidden:true` will not show in the sidebar(default is false)
@@ -31,12 +33,27 @@ export const constantRouterMap = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
+    redirect: '/dashboard/show/index',
+    name: 'Index',
+    hidden: true
+  },
+
+  {
+    path: '/dashboard',
     name: 'Dashboard',
-    // hidden: true,
+    component: Layout,
+    redirect: '/dashboard/show/index',
+    meta: { title: 'Dashboard' },
     children: [{
-      path: 'dashboard',
-      component: () => import('@/views/dashboard/index')
+      path: 'show',
+      name: 'dashboard_show',
+      component: AppMain,
+      children: [{
+        path: 'index',
+        name: 'dashboard_show_index',
+        meta: { title: '首页', icon: 'example' },
+        component: () => import('@/views/dashboard/index')
+      }]
     }]
   },
 
