@@ -9,7 +9,7 @@ export default {
   name: 'blog',
   component: Layout,
   redirect: '/blog/show/index',
-  meta: { title: '博客中心', icon: 'inbox' },
+  meta: { title: 'blogCenter', icon: 'inbox' },
   children: [{
     path: 'show',
     name: 'blog_show',
@@ -17,7 +17,7 @@ export default {
     children: [{
       path: 'index',
       name: 'blog_show_index',
-      meta: { title: '展示页', icon: 'example' },
+      meta: { title: 'bolgShow', icon: 'example' },
       component: Blog.Show
     }]
   }, {
@@ -25,16 +25,16 @@ export default {
     name: 'blog_info',
     component: AppMain,
     redirect: '/blog/info/details',
-    meta: { title: '博客信息', icon: 'example' },
+    meta: { title: 'blogInfo', icon: 'example' },
     children: [{
       path: 'details',
       name: 'blog_info_details',
-      meta: { title: '信息详情', icon: 'example' },
+      meta: { title: 'infoDetail', icon: 'example' },
       component: Blog.BlogInfo.Details
     }, {
       path: 'edit',
       name: 'blog_info_edit',
-      meta: { title: '信息编辑', icon: 'example' },
+      meta: { title: 'infoEdit', icon: 'example' },
       component: Blog.BlogInfo.Edit
     }]
   }, {
@@ -42,16 +42,16 @@ export default {
     name: 'blog_repos',
     component: AppMain,
     redirect: '/blog/repos/details',
-    meta: { title: '仓库', icon: 'example' },
+    meta: { title: 'blogRepos', icon: 'example' },
     children: [{
       path: 'details',
       name: 'blog_repos_details',
-      meta: { title: '仓库详情', icon: 'reorder' },
+      meta: { title: 'reposDetail', icon: 'example' },
       component: Blog.Repos.Details
     }, {
       path: 'edit',
       name: 'blog_repos_edit',
-      meta: { title: '仓库编辑', icon: 'example' },
+      meta: { title: 'reposEdit', icon: 'example' },
       component: Blog.Repos.Edit
     }]
   }, {
@@ -59,16 +59,16 @@ export default {
     name: 'blog_articles',
     component: AppMain,
     redirect: '/blog/articles/list',
-    meta: { title: '文章管理', icon: 'example' },
+    meta: { title: 'blogArticle', icon: 'example' },
     children: [{
       path: 'list',
       name: 'blog_articles_list',
-      meta: { title: '文章列表', icon: 'example' },
+      meta: { title: 'articlesList', icon: 'example' },
       component: Blog.Articles.List
     }, {
       path: 'edit',
       name: 'blog_articles_edit',
-      meta: { title: '文章编辑', icon: 'example' },
+      meta: { title: 'articlesEdit', icon: 'example' },
       component: Blog.Articles.Edit
     }]
   }]

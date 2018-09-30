@@ -43,7 +43,7 @@ export const constantRouterMap = [
     name: 'Dashboard',
     component: Layout,
     redirect: '/dashboard/show/index',
-    meta: { title: 'Dashboard' },
+    meta: { title: 'dashboard' },
     children: [{
       path: 'show',
       name: 'dashboard_show',
@@ -51,7 +51,7 @@ export const constantRouterMap = [
       children: [{
         path: 'index',
         name: 'dashboard_show_index',
-        meta: { title: '首页', icon: 'example' },
+        meta: { title: 'index', icon: 'example' },
         component: () => import('@/views/dashboard/index')
       }]
     }]
