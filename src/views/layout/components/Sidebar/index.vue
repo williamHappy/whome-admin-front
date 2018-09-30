@@ -45,7 +45,7 @@ export default {
           }
         }
       }
-      console.log(child_routes)
+      // console.log(child_routes)
       return child_routes
       // return this.$router.options.routes
     },
