@@ -34,16 +34,39 @@
         </el-col>
 
         <!-- todo 放置个人信息 -->
-        <el-col :span="4"/>
-
+        <el-col :span="4">
+          <el-dropdown class="avatar-container" trigger="click">
+            <div class="avatar-wrapper">
+              <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+              <i class="el-icon-caret-bottom"/>
+            </div>
+            <el-dropdown-menu slot="dropdown" class="user-dropdown">
+              <router-link class="inlineBlock" to="/">
+                <el-dropdown-item>
+                  Home
+                </el-dropdown-item>
+              </router-link>
+              <el-dropdown-item divided>
+                <span style="display:block;" @click="logout">LogOut</span>
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-col>
       </el-row>
     </header>
   </div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'HeaderNav',
+  computed: {
+    ...mapGetters([
+      'avatar'
+    ])
+  },
   mounted() {
     // this.setDialogInfo('access');
     // this.onGetSetting();
@@ -51,6 +74,11 @@ export default {
   created() {
   },
   methods: {
+    logout() {
+      this.$store.dispatch('LogOut').then(() => {
+        location.reload() // 为了重新实例化vue-router对象 避免bug
+      })
+    }
   }
 }
 </script>
@@ -67,12 +95,6 @@ export default {
   margin-top: 5px;
 }
 
-.fa-user {
-  position: relative;
-  top: -2px;
-  margin-right: 4px;
-}
-
 .head-nav {
   width: 100%;
   height: 60px;
@@ -83,28 +105,29 @@ export default {
   z-index: 99;
   color: #fff;
   border-bottom: 1px solid #1f2d3d;
+}
 
-  .logout {
-    width: 60px;
-    height: 60px;
-    line-height: 60px;
-    text-align: center;
-    float: right;
+.avatar-container {
+  height: 50px;
+  display: inline-block;
+  position: absolute;
+  right: 35px;
+  .avatar-wrapper {
     cursor: pointer;
+    margin-top: 10px;
+    position: relative;
+    .user-avatar {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+    }
+    .el-icon-caret-bottom {
+      position: absolute;
+      right: -20px;
+      top: 25px;
+      font-size: 12px;
+    }
   }
 }
 
-.userinfo {
-  text-align: right;
-}
-
-.username {
-  height: 60px;
-  line-height: 60px;
-  cursor: pointer;
-
-  .el-dropdown {
-    color: #fff;
-  }
-}
 </style>
