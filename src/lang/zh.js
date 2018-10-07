@@ -28,5 +28,11 @@ export default {
     theme: '换肤',
     lang: '语言',
     screenfull: '全屏'
+  },
+  tagsView: {
+    refresh: '刷新',
+    close: '关闭',
+    closeOthers: '关闭其它',
+    closeAll: '关闭所有'
   }
 }
