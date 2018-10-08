@@ -40,6 +40,10 @@
             background-color="#324057">
             <template v-if="device!=='mobile'">
               <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
+                <header-search class="header-search right-menu-item" @click="handleSearchClick"/>
+              </el-tooltip>
+
+              <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
                 <screenfull class="screenfull right-menu-item"/>
               </el-tooltip>
 
@@ -81,14 +85,21 @@ import { generateTitle } from '@/utils/i18n'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
 import Screenfull from '@/components/Screenfull'
+import HeaderSearch from '@/components/HeaderSearch'
+
+import mixinSearch from '.././mixin/search'
 
 export default {
   name: 'HeaderNav',
   components: {
     Screenfull,
     LangSelect,
-    ThemePicker
+    ThemePicker,
+    HeaderSearch
   },
+  mixins: [
+    mixinSearch
+  ],
   computed: {
     ...mapGetters([
       'device',

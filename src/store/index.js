@@ -4,6 +4,7 @@ import app from './modules/app'
 import tagsView from './modules/tagsView'
 import user from './modules/user'
 import router from './modules/router'
+import search from './modules/search'
 import getters from './getters'
 
 Vue.use(Vuex)
@@ -13,6 +14,7 @@ const store = new Vuex.Store({
     app,
     tagsView,
     router,
+    search,
     user
   },
   getters

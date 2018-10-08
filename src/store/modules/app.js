@@ -6,7 +6,8 @@ const app = {
       opened: !+Cookies.get('sidebarStatus'),
       withoutAnimation: false
     },
-    device: 'desktop'
+    device: 'desktop',
+    language: Cookies.get('language') || 'en'
   },
   mutations: {
     TOGGLE_SIDEBAR: state => {
@@ -25,10 +26,14 @@ const app = {
     },
     TOGGLE_DEVICE: (state, device) => {
       state.device = device
+    },
+    SET_LANGUAGE: (state, language) => {
+      state.language = language
+      Cookies.set('language', language)
     }
   },
   actions: {
-    ToggleSideBar: ({ commit }) => {
+    ToggleSideBar({ commit }) {
       commit('TOGGLE_SIDEBAR')
     },
     CloseSideBar({ commit }, { withoutAnimation }) {
@@ -36,6 +41,9 @@ const app = {
     },
     ToggleDevice({ commit }, device) {
       commit('TOGGLE_DEVICE', device)
+    },
+    SetLanguage({ commit }, language) {
+      commit('SET_LANGUAGE', language)
     }
   }
 }
