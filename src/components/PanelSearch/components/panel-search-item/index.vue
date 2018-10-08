@@ -2,8 +2,8 @@
   <div :class="hoverMode ? 'can-hover' : ''" class="d2-panel-search-item" flex>
     <div class="d2-panel-search-item__icon" flex-box="0">
       <div class="d2-panel-search-item__icon-box" flex="main:center cross:center">
-        <d2-icon v-if="item.icon" :name="item.icon"/>
-        <d2-icon-svg v-else-if="item.iconSvg" :name="item.iconSvg"/>
+        <d2-icon v-if="item.icon" :name="item.icon" />
+        <d2-icon-svg v-else-if="item.iconSvg" :name="item.iconSvg" />
         <d2-icon v-else name="file-o"/>
       </div>
     </div>
@@ -23,6 +23,10 @@
 
 <script>
 export default {
+  components: {
+    'd2-icon': () => import('@/components/d2-icon'),
+    'd2-icon-svg': () => import('@/components/d2-icon-svg')
+  },
   props: {
     item: {
       type: Object,

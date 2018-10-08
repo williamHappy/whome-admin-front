@@ -3,10 +3,24 @@
     <header-nav/>
     <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside"/>
     <sidebar class="sidebar-container"/>
-    <div class="main-container">
-      <navbar/>
-      <tags-view/>
-      <app-main/>
+    <!-- 主体 -->
+    <div class="app-container-main">
+      <!-- 搜索 -->
+      <transition name="fade-scale">
+        <div v-show="searchActive" class="main-container">
+          <d2-panel-search
+            ref="panelSearch"
+            @close="searchPanelClose"/>
+        </div>
+      </transition>
+      <!-- 内容 -->
+      <transition name="fade-scale">
+        <div v-show="!searchActive" class="main-container" >
+          <navbar/>
+          <tags-view/>
+          <app-main/>
+        </div>
+      </transition>
     </div>
   </div>
 </template>
@@ -14,6 +28,7 @@
 <script>
 import { HeaderNav, Navbar, Sidebar, AppMain, TagsView } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
+import mixinSearch from './mixin/search'
 
 export default {
   name: 'Layout',
@@ -24,7 +39,7 @@ export default {
     AppMain,
     TagsView
   },
-  mixins: [ResizeMixin],
+  mixins: [ResizeMixin, mixinSearch],
   computed: {
     sidebar() {
       return this.$store.state.app.sidebar
@@ -38,6 +53,14 @@ export default {
         openSidebar: this.sidebar.opened,
         withoutAnimation: this.sidebar.withoutAnimation,
         mobile: this.device === 'mobile'
+      }
+    }
+  },
+  watch: {
+    // 可以通过watch监听vuex中的text，数据变动时能够执行对应的函数
+    '$store.state.search.active'(active) {
+      if (active) {
+        this.$refs.panelSearch.focus()
       }
     }
   },

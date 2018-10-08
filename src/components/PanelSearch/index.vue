@@ -57,7 +57,8 @@ import { mapState } from 'vuex'
 import mixin from './components/mixin/menu'
 export default {
   components: {
-    'd2-panel-search-item': () => import('./components/panel-search-item/index.vue')
+    'd2-panel-search-item': () => import('./components/panel-search-item/index.vue'),
+    'd2-icon-svg': () => import('@/components/d2-icon-svg')
   },
   mixins: [
     mixin
@@ -122,7 +123,6 @@ export default {
     focus() {
       this.input = ''
       setTimeout(() => {
-        console.log(this.$refs)
         this.$refs.input.focus()
         // 还原
         this.searchText = ''

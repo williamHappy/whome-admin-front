@@ -39,7 +39,6 @@ export default {
     handleSearchClick() {
       this.searchToggle()
       if (this.searchActive) {
-        console.log(this.$refs)
         // this.$refs.panelSearch.focus()
       }
     },

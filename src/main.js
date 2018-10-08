@@ -1,5 +1,8 @@
 import Vue from 'vue'
 
+// flex 布局库
+import 'flex.css'
+
 import 'normalize.css/normalize.css' // A modern alternative to CSS resets
 
 import ElementUI from 'element-ui'

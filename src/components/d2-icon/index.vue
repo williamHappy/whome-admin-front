@@ -1,5 +1,5 @@
 <template>
-  <i :class="`fa-${name}`" class="fa" aria-hidden="true" />
+  <i :class="`fa-${name}`" class="fa" aria-hidden="true" style="color: #fff;" />
 </template>
 
 <script>

@@ -1,7 +1,8 @@
 <template>
   <div>
     <header class="head-nav">
-      <el-row>
+      <el-row
+        :style="{opacity: searchActive ? .1 : 1}">
         <!-- logo -->
         <el-col :span="4" class="logo-container">
           <router-link to="/">
@@ -39,7 +40,7 @@
             class="right-menu"
             background-color="#324057">
             <template v-if="device!=='mobile'">
-              <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
+              <el-tooltip :content="$t('navbar.search')" effect="dark" placement="bottom">
                 <header-search class="header-search right-menu-item" @click="handleSearchClick"/>
               </el-tooltip>
 
@@ -154,6 +155,10 @@ export default {
   .right-menu-item {
     display: inline-block;
     margin: 0 8px;
+  }
+
+  .header-search {
+    vertical-align: middle;
   }
 
   .screenfull {
