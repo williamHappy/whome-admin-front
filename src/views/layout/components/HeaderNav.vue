@@ -139,7 +139,7 @@ export default {
 .right-menu {
   height: 60px;
   line-height: 60px;
-  float: right;
+  // float: right;
   .right-menu-item {
     display: inline-block;
     margin: 0 8px;
