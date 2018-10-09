@@ -38,17 +38,19 @@
           <el-menu
             class="right-menu"
             background-color="#324057">
-            <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
-              <screenfull class="screenfull right-menu-item"/>
-            </el-tooltip>
+            <template v-if="device!=='mobile'">
+              <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
+                <screenfull class="screenfull right-menu-item"/>
+              </el-tooltip>
 
-            <el-tooltip :content="$t('navbar.lang')" effect="dark" placement="bottom">
-              <lang-select class="international right-menu-item"/>
-            </el-tooltip>
+              <el-tooltip :content="$t('navbar.lang')" effect="dark" placement="bottom">
+                <lang-select class="international right-menu-item"/>
+              </el-tooltip>
 
-            <el-tooltip :content="$t('navbar.theme')" effect="dark" placement="bottom">
-              <theme-picker class="theme-switch right-menu-item"/>
-            </el-tooltip>
+              <el-tooltip :content="$t('navbar.theme')" effect="dark" placement="bottom">
+                <theme-picker class="theme-switch right-menu-item"/>
+              </el-tooltip>
+            </template>
 
             <el-dropdown class="avatar-container right-menu-item" trigger="click">
               <div class="avatar-wrapper">
@@ -89,6 +91,7 @@ export default {
   },
   computed: {
     ...mapGetters([
+      'device',
       'avatar'
     ])
   },
@@ -136,6 +139,7 @@ export default {
 .right-menu {
   height: 60px;
   line-height: 60px;
+  // float: right;
   .right-menu-item {
     display: inline-block;
     margin: 0 8px;
