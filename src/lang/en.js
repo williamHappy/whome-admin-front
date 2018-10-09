@@ -27,7 +27,8 @@ export default {
   navbar: {
     theme: 'theme',
     lang: 'language',
-    screenfull: 'screenfull'
+    screenfull: 'screenfull',
+    search: 'search'
   },
   tagsView: {
     refresh: 'Refresh',

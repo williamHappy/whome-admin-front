@@ -9,6 +9,10 @@ const getters = {
   visitedViews: state => state.tagsView.visitedViews,
   cachedViews: state => state.tagsView.cachedViews,
 
+  // 搜索
+  active: state => state.search.active,
+  hotkey: state => state.search.hotkey,
+
   token: state => state.user.token,
   avatar: state => state.user.avatar,
   name: state => state.user.name,

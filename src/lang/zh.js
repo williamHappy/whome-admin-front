@@ -27,7 +27,8 @@ export default {
   navbar: {
     theme: '换肤',
     lang: '语言',
-    screenfull: '全屏'
+    screenfull: '全屏',
+    search: '搜索'
   },
   tagsView: {
     refresh: '刷新',
