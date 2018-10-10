@@ -219,7 +219,8 @@ export default {
     handleEsc() {
       this.closeSuggestion()
       this.$nextTick(() => {
-        this.$emit('close')
+        // this.$emit('close')
+        this.searchPanelClose()
       })
     },
 
@@ -234,7 +235,11 @@ export default {
       }
       // 用户选择的是其它页面
       this.$nextTick(() => {
-        this.handleMenuSelect(path)
+        this.$router.push({
+          path: path
+        })
+        this.handleEsc()
+        // this.handleMenuSelect(path)
       })
     }
 
@@ -327,7 +332,7 @@ export default {
   .dialog-body {
     text-align: center;
     .panel-search__input {
-      width: 500px;
+      width: 80%;
     }
     .panel-search__tip {
       @extend %unable-select;

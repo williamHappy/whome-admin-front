@@ -9,6 +9,9 @@ import i18n from './lang'
 
 import '@/styles/index.scss' // global css
 
+// flex 布局库
+import 'flex.css'
+
 import App from './App'
 import router from './router'
 import store from './store'

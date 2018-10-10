@@ -14,6 +14,7 @@ export default {
     path: 'show',
     name: 'system_show',
     component: AppMain,
+    redirect: '/system/show/index',
     children: [{
       path: 'index',
       name: 'system_show_index',

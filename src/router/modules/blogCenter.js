@@ -14,6 +14,7 @@ export default {
     path: 'show',
     name: 'blog_show',
     component: AppMain,
+    redirect: '/blog/show/index',
     children: [{
       path: 'index',
       name: 'blog_show_index',

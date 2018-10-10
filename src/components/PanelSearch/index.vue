@@ -35,7 +35,7 @@ export default {
     }
   },
   mounted() {
-    this.show()
+    // this.show()
   },
   methods: {
     show() {

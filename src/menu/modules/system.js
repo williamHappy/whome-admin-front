@@ -4,7 +4,7 @@ export default {
   title: 'systemCenter',
   icon: 'system-show',
   children: (pre => [
-    { path: `${pre}index`, title: 'systemShow', icon: 'system-show' },
+    { path: `${pre}show`, title: 'systemShow', icon: 'system-show' },
     {
       path: `${pre}user`,
       title: 'systemUser',

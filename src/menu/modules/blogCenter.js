@@ -4,7 +4,7 @@ export default {
   title: 'blogCenter',
   icon: 'blog-show',
   children: (pre => [
-    { path: `${pre}index`, title: 'bolgShow', icon: 'blog-show' },
+    { path: `${pre}show`, title: 'bolgShow', icon: 'blog-show' },
     {
       path: `${pre}info`,
       title: 'blogInfo',
