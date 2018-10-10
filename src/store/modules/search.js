@@ -49,6 +49,7 @@ const search = {
         })
       }
       push(menu)
+      // console.log(pool)
       state.pool = pool
     }
   }

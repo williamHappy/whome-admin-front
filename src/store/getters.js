@@ -5,6 +5,7 @@ const getters = {
 
   sidebar: state => state.app.sidebar,
   device: state => state.app.device,
+  language: state => state.app.language,
 
   visitedViews: state => state.tagsView.visitedViews,
   cachedViews: state => state.tagsView.cachedViews,
@@ -12,6 +13,7 @@ const getters = {
   // 搜索
   active: state => state.search.active,
   hotkey: state => state.search.hotkey,
+  pool: state => state.search.pool,
 
   token: state => state.user.token,
   avatar: state => state.user.avatar,

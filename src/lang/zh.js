@@ -11,7 +11,7 @@ export default {
     blogRepos: '博客仓库',
     reposDetail: '仓库详情',
     reposEdit: '仓库编辑',
-    blogArticle: '文章管理',
+    blogArticles: '文章管理',
     articlesList: '文章列表',
     articlesEdit: '文章编辑',
 

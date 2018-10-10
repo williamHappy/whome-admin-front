@@ -16,6 +16,8 @@ import store from './store'
 import '@/icons' // icon
 import '@/permission' // permission control
 
+import { menu } from '@/menu'
+
 // Vue.use(ElementUI, { locale })
 Vue.use(ElementUI, {
   size: 'medium', // set element-ui default size
@@ -29,5 +31,8 @@ new Vue({
   router,
   store,
   i18n,
+  created() {
+    this.$store.commit('search/init', menu)
+  },
   render: h => h(App)
 })

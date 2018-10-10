@@ -75,33 +75,39 @@
           </el-menu>
 
           <!-- 对话框 -->
-          <el-dialog :visible.sync="dialogActive" :append-to-body="true" title="搜索" center>
-            <el-autocomplete
-              ref="input"
-              :fetch-suggestions="querySearch"
-              :trigger-on-focus="false"
-              :clearable="true"
-              v-model="searchText"
-              class="panel-search__input"
-              suffix-icon="el-icon-search"
-              placeholder="搜索页面"
-              @keydown.esc.native="handleEsc"
-              @select="handleSelect">
-              <d2-panel-search-item
-                slot-scope="{ item }"
-                :item="item"/>
-            </el-autocomplete>
-            <div class="panel-search__tip">
-              您可以使用快捷键
-              <span class="panel-search__key">{{ searchHotkey.open }}</span>
-              唤醒搜索面板，按
-              <span class="panel-search__key">{{ searchHotkey.close }}</span>
-              关闭
+          <el-dialog
+            :visible.sync="dialogActive"
+            :append-to-body="true"
+            width="40%"
+            class="search-dialog"
+            title="搜索"
+            center
+            @close="handleEsc">
+            <div class="dialog-body">
+              <el-autocomplete
+                ref="input"
+                :fetch-suggestions="querySearch"
+                :trigger-on-focus="false"
+                :clearable="true"
+                v-model="searchText"
+                class="panel-search__input"
+                suffix-icon="el-icon-search"
+                placeholder="搜索页面"
+                @keydown.esc.native="handleEsc"
+                @select="handleSelect">
+                <panel-search-item
+                  slot-scope="{ item }"
+                  :item="item"/>
+              </el-autocomplete>
+              <div class="panel-search__tip">
+                您可以使用快捷键
+                <span class="panel-search__key">{{ searchHotkey.open }}</span>
+                唤醒搜索面板，按
+                <span class="panel-search__key">{{ searchHotkey.close }}</span>
+                关闭
+              </div>
             </div>
-            <div slot="footer" class="dialog-footer">
-              <!-- <el-button @click="dialogSearchVisible = false">取 消</el-button>
-              <el-button type="primary" @click="dialogSearchVisible = false">确 定</el-button> -->
-            </div>
+            <div slot="footer" class="dialog-footer" />
           </el-dialog>
         </el-col>
       </el-row>
@@ -119,6 +125,8 @@ import ThemePicker from '@/components/ThemePicker'
 import Screenfull from '@/components/Screenfull'
 import HeaderSearch from '@/components/HeaderSearch'
 
+import PanelSearchItem from '@/components/PanelSearch'
+
 import mixinSearch from '.././mixin/search'
 
 export default {
@@ -127,7 +135,8 @@ export default {
     Screenfull,
     LangSelect,
     ThemePicker,
-    HeaderSearch
+    HeaderSearch,
+    PanelSearchItem
   },
   mixins: [
     mixinSearch
@@ -141,7 +150,8 @@ export default {
   computed: {
     ...mapGetters([
       'device',
-      'avatar'
+      'avatar',
+      'pool'
     ])
   },
   mounted() {
@@ -304,5 +314,38 @@ export default {
     }
   }
 }
+
+// 搜索dialog start
+
+// 禁止用户选中 鼠标变为手形
+%unable-select {
+  user-select: none;
+  cursor: pointer;
+}
+
+.search-dialog {
+  .dialog-body {
+    text-align: center;
+    .panel-search__input {
+      width: 500px;
+    }
+    .panel-search__tip {
+      @extend %unable-select;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      font-size: 12px;
+      color: #909399;
+      .panel-search__key {
+        padding: 1px 5px;
+        margin: 0px 2px;
+        border-radius: 2px;
+        background-color: #606266;
+        color: #f8f8f9;
+      }
+    }
+  }
+}
+
+// 搜索dialog end
 
 </style>

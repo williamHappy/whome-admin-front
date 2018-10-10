@@ -11,7 +11,7 @@ export default {
     blogRepos: 'Warehouse',
     reposDetail: 'HouseDetails',
     reposEdit: 'HouseEdit',
-    blogArticle: 'Articles',
+    blogArticles: 'Articles',
     articlesList: 'ArticleList',
     articlesEdit: 'ArticleEdit',
 
