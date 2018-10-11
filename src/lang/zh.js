@@ -2,6 +2,7 @@ export default {
   route: {
     dashboard: 'Dashboard',
     index: 'dashboard',
+    merge: '工作台',
 
     blogCenter: '博客中心',
     bolgShow: '展示页',

@@ -2,6 +2,7 @@ export default {
   route: {
     dashboard: 'Dashboard',
     index: 'dashboard',
+    merge: 'workbench',
 
     blogCenter: 'BlogCenter',
     bolgShow: 'Stage',

@@ -46,7 +46,7 @@
               unique-opened
               router>
               <el-submenu index="1">
-                <template slot="title">控制台</template>
+                <template slot="title">{{ generateTitle('merge') }}</template>
                 <el-menu-item
                   v-for="route in $router.options.routes"
                   v-if="!route.hidden"
