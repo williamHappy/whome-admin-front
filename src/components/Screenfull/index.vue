@@ -72,7 +72,7 @@ export default {
   cursor: pointer;
   fill: aliceblue;
   /* width: 20px; */
-  height: 20px;
+  height: 25px;
   vertical-align: middle;
 }
 </style>

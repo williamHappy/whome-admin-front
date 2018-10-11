@@ -39,6 +39,10 @@
             class="right-menu"
             background-color="#324057">
             <template v-if="device!=='mobile'">
+              <el-tooltip :content="$t('navbar.search')" effect="dark" placement="bottom">
+                <header-search class="header-search right-menu-item" @click.native="handleSearchClick"/>
+              </el-tooltip>
+
               <el-tooltip :content="$t('navbar.screenfull')" effect="dark" placement="bottom">
                 <screenfull class="screenfull right-menu-item"/>
               </el-tooltip>
@@ -69,6 +73,42 @@
               </el-dropdown-menu>
             </el-dropdown>
           </el-menu>
+
+          <!-- 对话框 -->
+          <el-dialog
+            :visible.sync="dialogActive"
+            :append-to-body="true"
+            width="40%"
+            class="search-dialog"
+            title="搜索"
+            center
+            @close="handleEsc">
+            <div class="dialog-body">
+              <el-autocomplete
+                ref="input"
+                :fetch-suggestions="querySearch"
+                :trigger-on-focus="false"
+                :clearable="true"
+                v-model="searchText"
+                class="panel-search__input"
+                suffix-icon="el-icon-search"
+                placeholder="搜索页面"
+                @keydown.esc.native="handleEsc"
+                @select="handleSelect">
+                <panel-search-item
+                  slot-scope="{ item }"
+                  :item="item"/>
+              </el-autocomplete>
+              <div class="panel-search__tip">
+                您可以使用快捷键
+                <span class="panel-search__key">{{ searchHotkey.open }}</span>
+                唤醒搜索面板，按
+                <span class="panel-search__key">{{ searchHotkey.close }}</span>
+                关闭
+              </div>
+            </div>
+            <div slot="footer" class="dialog-footer" />
+          </el-dialog>
         </el-col>
       </el-row>
     </header>
@@ -77,22 +117,41 @@
 
 <script>
 import { mapGetters } from 'vuex'
+import Fuse from 'fuse.js'
+
 import { generateTitle } from '@/utils/i18n'
 import LangSelect from '@/components/LangSelect'
 import ThemePicker from '@/components/ThemePicker'
 import Screenfull from '@/components/Screenfull'
+import HeaderSearch from '@/components/HeaderSearch'
+
+import PanelSearchItem from '@/components/PanelSearch'
+
+import mixinSearch from '.././mixin/search'
 
 export default {
   name: 'HeaderNav',
   components: {
     Screenfull,
     LangSelect,
-    ThemePicker
+    ThemePicker,
+    HeaderSearch,
+    PanelSearchItem
+  },
+  mixins: [
+    mixinSearch
+  ],
+  data() {
+    return {
+      searchText: '',
+      results: []
+    }
   },
   computed: {
     ...mapGetters([
       'device',
-      'avatar'
+      'avatar',
+      'pool'
     ])
   },
   mounted() {
@@ -107,7 +166,83 @@ export default {
       this.$store.dispatch('LogOut').then(() => {
         location.reload() // 为了重新实例化vue-router对象 避免bug
       })
+    },
+
+    /**
+     * @description 过滤选项 这个方法在每次输入框的值发生变化时会触发
+     */
+    querySearch(queryString, callback) {
+      var pool = this.pool
+      const results = this.query(queryString ? pool : [], queryString)
+      this.results = results
+      callback(results)
+    },
+    /**
+     * @description 指定的数据源中根据指定的查询字符串过滤数据
+     * @param {Object} pool 需要过滤的数据
+     * @param {String} queryString 查询字符串
+     */
+    query(pool, queryString) {
+      return new Fuse(pool, {
+        shouldSort: true,
+        tokenize: true,
+        threshold: 0.6,
+        location: 0,
+        distance: 100,
+        maxPatternLength: 32,
+        minMatchCharLength: 1,
+        keys: [
+          'fullTitle',
+          'path'
+        ]
+      })
+        .search(queryString)
+        .map(e => ({
+          value: e.fullTitle,
+          ...e
+        }))
+    },
+
+    /**
+     * @augments 关闭输入框的下拉菜单
+     */
+    closeSuggestion() {
+      if (this.$refs.input.activated) {
+        this.$refs.input.suggestions = []
+        this.$refs.input.activated = false
+      }
+    },
+
+    /**
+     * @augments 接收用户触发的关闭
+     */
+    handleEsc() {
+      this.closeSuggestion()
+      this.$nextTick(() => {
+        // this.$emit('close')
+        this.searchPanelClose()
+      })
+    },
+
+    /**
+     * @description 接收用户在下拉菜单中选中事件
+     */
+    handleSelect({ path }) {
+      // 如果用户选择的就是当前页面 就直接关闭搜索面板
+      if (path === this.$route.path) {
+        this.handleEsc()
+        return
+      }
+      // 用户选择的是其它页面
+      this.$nextTick(() => {
+        this.$router.push({
+          path: path
+        })
+        this.handleEsc()
+        // this.handleMenuSelect(path)
+      })
     }
+
   }
 }
 </script>
@@ -145,6 +280,10 @@ export default {
     margin: 0 8px;
   }
 
+  .header-search {
+    vertical-align: middle;
+  }
+
   .screenfull {
     vertical-align: middle;
   }
@@ -180,5 +319,38 @@ export default {
     }
   }
 }
+
+// 搜索dialog start
+
+// 禁止用户选中 鼠标变为手形
+%unable-select {
+  user-select: none;
+  cursor: pointer;
+}
+
+.search-dialog {
+  .dialog-body {
+    text-align: center;
+    .panel-search__input {
+      width: 80%;
+    }
+    .panel-search__tip {
+      @extend %unable-select;
+      margin-top: 20px;
+      margin-bottom: 40px;
+      font-size: 12px;
+      color: #909399;
+      .panel-search__key {
+        padding: 1px 5px;
+        margin: 0px 2px;
+        border-radius: 2px;
+        background-color: #606266;
+        color: #f8f8f9;
+      }
+    }
+  }
+}
+
+// 搜索dialog end
 
 </style>

@@ -9,12 +9,17 @@ import i18n from './lang'
 
 import '@/styles/index.scss' // global css
 
+// flex 布局库
+import 'flex.css'
+
 import App from './App'
 import router from './router'
 import store from './store'
 
 import '@/icons' // icon
 import '@/permission' // permission control
+
+import { menu } from '@/menu'
 
 // Vue.use(ElementUI, { locale })
 Vue.use(ElementUI, {
@@ -29,5 +34,8 @@ new Vue({
   router,
   store,
   i18n,
+  created() {
+    this.$store.commit('search/init', menu)
+  },
   render: h => h(App)
 })

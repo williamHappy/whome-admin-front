@@ -11,7 +11,7 @@ export default {
     blogRepos: 'Warehouse',
     reposDetail: 'HouseDetails',
     reposEdit: 'HouseEdit',
-    blogArticle: 'Articles',
+    blogArticles: 'Articles',
     articlesList: 'ArticleList',
     articlesEdit: 'ArticleEdit',
 
@@ -27,7 +27,8 @@ export default {
   navbar: {
     theme: 'theme',
     lang: 'language',
-    screenfull: 'screenfull'
+    screenfull: 'screenfull',
+    search: 'search'
   },
   tagsView: {
     refresh: 'Refresh',

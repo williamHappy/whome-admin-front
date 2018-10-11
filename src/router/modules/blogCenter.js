@@ -9,15 +9,16 @@ export default {
   name: 'blog',
   component: Layout,
   redirect: '/blog/show/index',
-  meta: { title: 'blogCenter', icon: 'inbox' },
+  meta: { title: 'blogCenter', icon: 'blog-show' },
   children: [{
     path: 'show',
     name: 'blog_show',
     component: AppMain,
+    redirect: '/blog/show/index',
     children: [{
       path: 'index',
       name: 'blog_show_index',
-      meta: { title: 'bolgShow', icon: 'example' },
+      meta: { title: 'bolgShow', icon: 'blog-show' },
       component: Blog.Show
     }]
   }, {
@@ -25,16 +26,16 @@ export default {
     name: 'blog_info',
     component: AppMain,
     redirect: '/blog/info/details',
-    meta: { title: 'blogInfo', icon: 'example' },
+    meta: { title: 'blogInfo', icon: 'blog-info' },
     children: [{
       path: 'details',
       name: 'blog_info_details',
-      meta: { title: 'infoDetail', icon: 'example' },
+      meta: { title: 'infoDetail', icon: 'blog-info-details' },
       component: Blog.BlogInfo.Details
     }, {
       path: 'edit',
       name: 'blog_info_edit',
-      meta: { title: 'infoEdit', icon: 'example' },
+      meta: { title: 'infoEdit', icon: 'blog-info-edit' },
       component: Blog.BlogInfo.Edit
     }]
   }, {
@@ -42,16 +43,16 @@ export default {
     name: 'blog_repos',
     component: AppMain,
     redirect: '/blog/repos/details',
-    meta: { title: 'blogRepos', icon: 'example' },
+    meta: { title: 'blogRepos', icon: 'blog-repos' },
     children: [{
       path: 'details',
       name: 'blog_repos_details',
-      meta: { title: 'reposDetail', icon: 'example' },
+      meta: { title: 'reposDetail', icon: 'blog-repos-detail' },
       component: Blog.Repos.Details
     }, {
       path: 'edit',
       name: 'blog_repos_edit',
-      meta: { title: 'reposEdit', icon: 'example' },
+      meta: { title: 'reposEdit', icon: 'blog-repos-edit' },
       component: Blog.Repos.Edit
     }]
   }, {
@@ -59,16 +60,16 @@ export default {
     name: 'blog_articles',
     component: AppMain,
     redirect: '/blog/articles/list',
-    meta: { title: 'blogArticle', icon: 'example' },
+    meta: { title: 'blogArticles', icon: 'blog-articles' },
     children: [{
       path: 'list',
       name: 'blog_articles_list',
-      meta: { title: 'articlesList', icon: 'example' },
+      meta: { title: 'articlesList', icon: 'blog-articles-list' },
       component: Blog.Articles.List
     }, {
       path: 'edit',
       name: 'blog_articles_edit',
-      meta: { title: 'articlesEdit', icon: 'example' },
+      meta: { title: 'articlesEdit', icon: 'blog-articles-edit' },
       component: Blog.Articles.Edit
     }]
   }]

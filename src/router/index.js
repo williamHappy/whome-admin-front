@@ -62,7 +62,7 @@ export const constantRouterMap = [
       children: [{
         path: 'index',
         name: 'dashboard_show_index',
-        meta: { title: 'index', icon: 'example' },
+        meta: { title: 'index', icon: 'dashboard' },
         component: () => import('@/views/dashboard/index')
       }]
     }]

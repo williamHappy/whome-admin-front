@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { menu } from '@/menu'
+
 export default {
   computed: {
     language() {
@@ -20,7 +22,8 @@ export default {
   methods: {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
-      this.$store.dispatch('setLanguage', lang)
+      this.$store.dispatch('SetLanguage', lang)
+      this.$store.commit('search/init', menu)
       this.$message({
         message: 'switch language success',
         type: 'success'
@@ -32,7 +35,7 @@ export default {
 
 <style scoped>
 .international-icon {
-  font-size: 30px;
+  font-size: 28px;
   color: aliceblue;
   cursor: pointer;
   vertical-align: -10px!important;
