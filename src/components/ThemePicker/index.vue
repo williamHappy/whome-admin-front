@@ -135,7 +135,7 @@ export default {
 
 <style>
 .theme-picker .el-color-picker__trigger {
-  vertical-align: middle;
+  vertical-align: 0;
 }
 
 .theme-picker-dropdown .el-color-dropdown__link-btn {

@@ -8,8 +8,8 @@
       xmlns="http://www.w3.org/2000/svg"
       p-id="2069"
       xmlns:xlink="http://www.w3.org/1999/xlink"
-      width="32"
-      height="32"
+      width="30"
+      height="30"
       @click="click">
       <path
         d="M333.493443 428.647617 428.322206 333.832158 262.572184 168.045297 366.707916 64.444754 64.09683 64.444754 63.853283 366.570793 167.283957 262.460644Z"
@@ -71,8 +71,6 @@ export default {
   display: inline-block;
   cursor: pointer;
   fill: aliceblue;
-  /* width: 20px; */
-  height: 25px;
-  vertical-align: middle;
+  vertical-align: 3px;
 }
 </style>

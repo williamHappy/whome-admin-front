@@ -1,40 +1,66 @@
 <template>
   <div>
     <header class="head-nav">
-      <el-row>
+      <!-- <el-row> -->
+      <div class="head-nav-container" flex>
         <!-- logo -->
-        <el-col :span="4" class="logo-container">
+        <div :style="{width: device!=='mobile'? '180px':'60px'}" class="logo-container" flex-box="0">
           <router-link to="/">
             <img
               :src="require('@/assets/logo_sm.png')"
+              :style="{margin: device!=='mobile'? '':'5px'}"
               class="logo"
               alt="">
           </router-link>
-        </el-col>
+        </div>
 
         <!-- 模块分类 -->
-        <el-col :span="16">
-          <el-menu
-            :default-active="$store.state.router.headerCurRouter || `/`"
-            class="el-menu-demo"
-            mode="horizontal"
-            background-color="#324057"
-            text-color="#fff"
-            active-text-color="#ffd04b"
-            unique-opened
-            router>
-            <el-menu-item
-              v-for="route in $router.options.routes"
-              v-if="!route.hidden"
-              :index="route.path"
-              :key="route.name">
-              {{ generateTitle(route.meta.title) }}
-            </el-menu-item>
-          </el-menu>
-        </el-col>
+        <div class="" flex-box="1">
+          <template v-if="device!=='mobile'">
+            <el-menu
+              :default-active="$store.state.router.headerCurRouter || `/`"
+              class="el-menu-demo"
+              mode="horizontal"
+              background-color="#324057"
+              text-color="#fff"
+              active-text-color="#ffd04b"
+              unique-opened
+              router>
+              <el-menu-item
+                v-for="route in $router.options.routes"
+                v-if="!route.hidden"
+                :index="route.path"
+                :key="route.name">
+                {{ generateTitle(route.meta.title) }}
+              </el-menu-item>
+            </el-menu>
+          </template>
+          <template v-else>
+            <el-menu
+              :default-active="$store.state.router.headerCurRouter || `/`"
+              class="el-menu-merge"
+              mode="horizontal"
+              background-color="#324057"
+              text-color="#fff"
+              active-text-color="#ffd04b"
+              unique-opened
+              router>
+              <el-submenu index="1">
+                <template slot="title">控制台</template>
+                <el-menu-item
+                  v-for="route in $router.options.routes"
+                  v-if="!route.hidden"
+                  :index="route.path"
+                  :key="route.name">
+                  {{ generateTitle(route.meta.title) }}
+                </el-menu-item>
+              </el-submenu>
+            </el-menu>
+          </template>
+        </div>
 
         <!-- todo 放置个人信息 -->
-        <el-col :span="4">
+        <div class="" flex-box="0">
           <el-menu
             class="right-menu"
             background-color="#324057">
@@ -109,8 +135,8 @@
             </div>
             <div slot="footer" class="dialog-footer" />
           </el-dialog>
-        </el-col>
-      </el-row>
+        </div>
+      </div>
     </header>
   </div>
 </template>
@@ -250,6 +276,7 @@ export default {
 <style scoped lang='scss'>
 .logo-container {
   height: 60px;
+  width: 180px;
 }
 
 .logo {
@@ -273,34 +300,14 @@ export default {
 
 .right-menu {
   height: 60px;
-  line-height: 60px;
-  // float: right;
   .right-menu-item {
     display: inline-block;
     margin: 0 8px;
   }
 
-  .header-search {
-    vertical-align: middle;
-  }
-
-  .screenfull {
-    vertical-align: middle;
-  }
-
-  .international{
-    vertical-align: middle;
-  }
-
-  .theme-switch {
-    vertical-align: middle;
-  }
-
   .avatar-container {
     height: 50px;
-    display: inline-block;
-    position: absolute;
-    right: 35px;
+    margin-right: 30px;
     .avatar-wrapper {
       cursor: pointer;
       margin-top: 10px;
