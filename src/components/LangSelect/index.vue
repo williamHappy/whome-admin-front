@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import { menu } from '@/menu'
+
 export default {
   computed: {
     language() {
@@ -21,6 +23,7 @@ export default {
     handleSetLanguage(lang) {
       this.$i18n.locale = lang
       this.$store.dispatch('SetLanguage', lang)
+      this.$store.commit('search/init', menu)
       this.$message({
         message: 'switch language success',
         type: 'success'

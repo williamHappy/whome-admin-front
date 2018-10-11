@@ -1,4 +1,5 @@
 import setting from '@/setting.js'
+import i18n from '@/lang'
 
 const search = {
   namespaced: true,
@@ -39,11 +40,12 @@ const search = {
       const push = function(menu, titlePrefix = []) {
         menu.forEach(m => {
           if (m.children) {
-            push(m.children, [...titlePrefix, m.title])
+            push(m.children, [...titlePrefix, i18n.t('route.' + m.title)])
           } else {
             pool.push({
               ...m,
-              fullTitle: [...titlePrefix, m.title].join(' / ')
+              title: i18n.t('route.' + m.title),
+              fullTitle: [...titlePrefix, i18n.t('route.' + m.title)].join(' / ')
             })
           }
         })
