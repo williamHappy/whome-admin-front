@@ -15,6 +15,6 @@ export default {
   font-size: 30px;
   color: aliceblue;
   cursor: pointer;
-  vertical-align: middle!important;
+  vertical-align: 2px!important;
 }
 </style>
