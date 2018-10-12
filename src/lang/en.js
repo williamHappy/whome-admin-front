@@ -1,4 +1,20 @@
 export default {
+  paas: {
+    name: 'whome'
+  },
+  login: {
+    username: 'username',
+    password: 'password',
+    login: 'Sign in',
+    formValid: {
+      nameError: 'Please enter the correct user name',
+      passwordLenError: 'The password can not be less than 5 digits'
+    },
+    thirdLoginLabel: 'Third party account login:',
+    socialWechat: 'wechat',
+    socialQQ: 'QQ',
+    socialGithub: 'Github'
+  },
   route: {
     dashboard: 'Dashboard',
     index: 'dashboard',

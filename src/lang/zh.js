@@ -1,4 +1,20 @@
 export default {
+  paas: {
+    name: 'whome'
+  },
+  login: {
+    username: '账号',
+    password: '密码',
+    login: '登录',
+    formValid: {
+      nameError: '请输入正确的用户名',
+      passwordLenError: '密码不能小于5位'
+    },
+    thirdLoginLabel: '第三方账号登录：',
+    socialWechat: '微信',
+    socialQQ: 'QQ',
+    socialGithub: 'Github'
+  },
   route: {
     dashboard: 'Dashboard',
     index: 'dashboard',
