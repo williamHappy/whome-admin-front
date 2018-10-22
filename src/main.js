@@ -15,10 +15,11 @@ import 'flex.css'
 import App from './App'
 import router from './router'
 import store from './store'
+import service from '@/utils/request'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-import '@/mock' // simulation data
+// import '@/mock' // simulation data
 
 import { menu } from '@/menu'
 
@@ -27,6 +28,9 @@ Vue.use(ElementUI, {
   size: 'medium', // set element-ui default size
   i18n: (key, value) => i18n.t(key, value)
 })
+
+// 使用axios
+Vue.prototype.$http = service
 
 Vue.config.productionTip = false
 

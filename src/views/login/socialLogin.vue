@@ -6,7 +6,9 @@
       </div>
     </el-tooltip>
     <el-tooltip :content="$t('login.socialQQ')" effect="light" placement="top">
-      <div class="social-btn">
+      <div
+        class="social-btn"
+        @click="QQLogin">
         <svg-icon icon-class="qq" class="icon-social"/>
       </div>
     </el-tooltip>
@@ -20,7 +22,18 @@
 
 <script>
 export default {
-
+  methods: {
+    QQLogin() {
+      this.$http
+        .get('/social/authorize/qq')
+        .then((reponse) => {
+          console.log(reponse)
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    }
+  }
 }
 </script>
 
