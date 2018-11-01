@@ -19,7 +19,7 @@ import service from '@/utils/request'
 
 import '@/icons' // icon
 import '@/permission' // permission control
-// import '@/mock' // simulation data
+import '@/mock' // simulation data
 
 import { menu } from '@/menu'
 

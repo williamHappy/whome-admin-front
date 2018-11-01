@@ -26,8 +26,9 @@ export default {
     QQLogin() {
       this.$http
         .get('/social/authorize/qq')
-        .then((reponse) => {
-          console.log(reponse)
+        .then((res) => {
+          // console.log(res)
+          window.location.href = res.data
         })
         .catch((err) => {
           console.log(err)
