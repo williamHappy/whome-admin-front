@@ -27,8 +27,8 @@ export default {
       this.$http
         .get('/social/authorize/qq')
         .then((res) => {
-          // console.log(res)
-          window.location.href = res.data
+          console.log(res)
+          // window.location.href = res.data
         })
         .catch((err) => {
           console.log(err)
