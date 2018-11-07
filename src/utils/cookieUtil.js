@@ -1,4 +1,4 @@
-import { setting } from '@/setting.js'
+import setting from '@/setting.js'
 import Cookies from 'js-cookie'
 
 class CookieUtil {
@@ -29,7 +29,7 @@ class CookieUtil {
     success && success()
   }
 
-  geteAll () {
+  geteAll() {
     return Cookies.get()
   }
 

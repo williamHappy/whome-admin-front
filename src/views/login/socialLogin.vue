@@ -21,9 +21,12 @@
 </template>
 
 <script>
-import { CookieUtil } from '@/utils/cookieUtil'
+import CookieUtil from '@/utils/cookieUtil.js'
 
 export default {
+  mounted() {
+    this.socialLogin()
+  },
   methods: {
     QQLogin() {
       this.$http
@@ -37,7 +40,8 @@ export default {
         })
     },
     socialLogin() {
-      let wxKey = CookieUtil.get('SOCIAL_WXKEY')
+      const wxKey = CookieUtil.get('SOCIAL_WXKEY')
+      console.log(wxKey)
     }
   }
 }
