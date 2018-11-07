@@ -21,6 +21,8 @@
 </template>
 
 <script>
+import { CookieUtil } from '@/utils/cookieUtil'
+
 export default {
   methods: {
     QQLogin() {
@@ -28,11 +30,14 @@ export default {
         .get('/social/authorize/qq')
         .then((res) => {
           console.log(res)
-          // window.location.href = res.data
+          window.location.href = res.data
         })
         .catch((err) => {
           console.log(err)
         })
+    },
+    socialLogin() {
+      let wxKey = CookieUtil.get('SOCIAL_WXKEY')
     }
   }
 }
