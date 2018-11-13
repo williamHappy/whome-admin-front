@@ -15,7 +15,7 @@ import 'flex.css'
 import App from './App'
 import router from './router'
 import store from './store'
-import service from '@/utils/request'
+import Axios from '@/utils/axios'
 
 import '@/icons' // icon
 import '@/permission' // permission control
@@ -30,7 +30,11 @@ Vue.use(ElementUI, {
 })
 
 // 使用axios
-Vue.prototype.$http = service
+Vue.prototype.$http = Axios
+
+// 解除浏览器对服务端返回的cookie信息交给javascript来处理的拦截
+// 参考：https://www.zhihu.com/question/53123279
+Vue.prototype.$http.defaults.withCredentials = true
 
 Vue.config.productionTip = false
 

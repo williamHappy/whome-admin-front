@@ -296,3 +296,9 @@ export function deepClone(source) {
 export function uniqueArr(arr) {
   return Array.from(new Set(arr))
 }
+
+export function getUrlParam(name) {
+  const reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)')
+  const result = window.location.search.substr(1).match(reg)
+  return result ? decodeURIComponent(result[2]) : null
+}

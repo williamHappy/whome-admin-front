@@ -1,7 +1,7 @@
-import request from '@/utils/request'
+import Axios from '@/utils/axios'
 
 export function login(username, password) {
-  return request({
+  return Axios({
     url: '/user/login',
     method: 'post',
     data: {
@@ -12,7 +12,7 @@ export function login(username, password) {
 }
 
 export function getInfo(token) {
-  return request({
+  return Axios({
     url: '/user/info',
     method: 'get',
     params: { token }
@@ -20,7 +20,7 @@ export function getInfo(token) {
 }
 
 export function logout() {
-  return request({
+  return Axios({
     url: '/user/logout',
     method: 'post'
   })

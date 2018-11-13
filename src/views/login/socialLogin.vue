@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { getUrlParam } from '@/utils'
 import CookieUtil from '@/utils/cookieUtil.js'
 
 export default {
@@ -40,8 +41,35 @@ export default {
         })
     },
     socialLogin() {
-      const wxKey = CookieUtil.get('SOCIAL_WXKEY')
-      console.log(wxKey)
+      const qqKey = CookieUtil.get('SOCIAL_QQKEY')
+      console.log(qqKey)
+      if (!qqKey) {
+        return
+      }
+      const code = getUrlParam('code')
+      if (!code) {
+        return
+      }
+      this.$http({
+        mounted: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'deviceId': qqKey
+        },
+        url: '/socialLogin/qq',
+        auth: {
+          username: 'whome',
+          password: 'whomeSecret'
+        },
+        params: {
+          code: getUrlParam('code'),
+          state: getUrlParam('state')
+        }
+      }).then((res) => {
+        console.log(res)
+      }).catch((err) => {
+        console.log(err)
+      })
     }
   }
 }

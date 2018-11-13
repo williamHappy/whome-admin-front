@@ -1,7 +1,7 @@
-import request from '@/utils/request'
+import Axios from '@/utils/axios'
 
 export function getList(params) {
-  return request({
+  return Axios({
     url: '/table/list',
     method: 'get',
     params
