@@ -25,6 +25,11 @@ import { getUrlParam } from '@/utils'
 import CookieUtil from '@/utils/cookieUtil.js'
 
 export default {
+  data() {
+    return {
+      redirect: undefined
+    }
+  },
   mounted() {
     this.socialLogin()
   },
@@ -58,8 +63,8 @@ export default {
         },
         url: '/socialLogin/qq',
         auth: {
-          username: 'whome',
-          password: 'whomeSecret'
+          username: 'whome-uac',
+          password: 'whomeUacSecret'
         },
         params: {
           code: getUrlParam('code'),
@@ -67,6 +72,8 @@ export default {
         }
       }).then((res) => {
         console.log(res)
+        this.$store.dispatch('UpdateAuthToken', res)
+        this.$router.push({ path: this.redirect || '/' })
       }).catch((err) => {
         console.log(err)
       })

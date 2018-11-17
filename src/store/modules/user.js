@@ -25,7 +25,7 @@ const user = {
   },
 
   actions: {
-    // 登录
+    // @Deprecated 登录(登陆单独拿出来处理，现在只做更新token的处理)
     Login({ commit }, userInfo) {
       const username = userInfo.username.trim()
       return new Promise((resolve, reject) => {
@@ -38,6 +38,11 @@ const user = {
           reject(error)
         })
       })
+    },
+
+    // 更新token
+    UpdateAuthToken({ commit }, authToken) {
+      
     },
 
     // 获取用户信息
