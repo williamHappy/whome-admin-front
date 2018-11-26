@@ -1,9 +1,11 @@
 import Cookies from 'js-cookie'
+// import store from '@/store'
 
 const TokenKey = 'Admin-Token'
 
 export function getToken() {
   return Cookies.get(TokenKey)
+  // return store.getters.getRedirectUri
 }
 
 export function setToken(token) {

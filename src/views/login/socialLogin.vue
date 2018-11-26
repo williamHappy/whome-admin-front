@@ -38,7 +38,7 @@ export default {
       this.$http
         .get('/social/authorize/qq')
         .then((res) => {
-          console.log(res)
+          // console.log(res)
           window.location.href = res.data
         })
         .catch((err) => {
@@ -72,7 +72,7 @@ export default {
         }
       }).then((res) => {
         console.log(res)
-        this.$store.dispatch('UpdateAuthToken', res)
+        this.$store.dispatch('UpdateAuthToken', res.data)
         this.$router.push({ path: this.redirect || '/' })
       }).catch((err) => {
         console.log(err)

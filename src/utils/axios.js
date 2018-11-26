@@ -29,13 +29,31 @@ Axios.interceptors.response.use(
   // response => response,
   response => {
     /**
+     * response ={
+     *    config: {},
+     *    data: { 返回数据 },
+     *    headers: {},
+     *    request: {},
+     *    status: 200,
+     *    statusText: ""
+     * }
+     */
+    /**
      * code为非20000是抛错 可结合自己业务进行修改
      */
     const res = response.data
-    console.log(res)
+    /**
+     * response.data
+     * res = {
+     *    code: 200000,
+     *    data: {},
+     *    msg: "请求成功",
+     *    requestId: null
+     * }
+     */
     if (res.code !== 200000) {
       Message({
-        message: res.message,
+        message: res.msg,
         type: 'error',
         duration: 5 * 1000
       })
@@ -56,7 +74,7 @@ Axios.interceptors.response.use(
           })
         })
       }
-      return Promise.reject('error')
+      return Promise.reject(res.msg)
     } else {
       return response.data
     }

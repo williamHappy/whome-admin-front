@@ -1,12 +1,29 @@
 import { login, logout, getInfo } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
+import CookieUtil from '@/utils/cookieUtil.js'
+import { USER } from '@/common/enum'
 
 const user = {
   state: {
     token: getToken(),
     name: '',
     avatar: '',
-    roles: []
+    roles: [],
+    redirectUri: '',
+    authToken: {
+      access_token: '',
+      expires_in: '',
+      timestamp: ''
+    }
+  },
+
+  getters: {
+    getRedirectUri: (state) => {
+      if (!state.redirectUri) {
+        state.redirectUri = CookieUtil.get(USER.REDIRECT_URI) ? CookieUtil.get(USER.REDIRECT_URI) : 'http://login.paascloud.net'
+      }
+      return state.redirectUri
+    }
   },
 
   mutations: {
@@ -21,6 +38,28 @@ const user = {
     },
     SET_ROLES: (state, roles) => {
       state.roles = roles
+    },
+
+    // 更新token
+    UPDATE_AUTH_TOKEN: (state, authToken) => {
+      state.authToken = authToken
+      console.log(authToken)
+      const expires = 2 / 24
+      CookieUtil.set({
+        key: USER.AUTH_TOKEN,
+        value: authToken,
+        expires: expires
+      })
+    },
+    // 更新redirectUri
+    UPDATE_REDIRECT_URI: (state, redirectUri) => {
+      state.redirectUri = redirectUri
+      if (redirectUri.indexOf('paascloud.net') > 0) {
+        CookieUtil.set({
+          key: USER.REDIRECT_URI,
+          value: redirectUri
+        })
+      }
     }
   },
 
@@ -42,7 +81,12 @@ const user = {
 
     // 更新token
     UpdateAuthToken({ commit }, authToken) {
-      
+      commit('UPDATE_AUTH_TOKEN', authToken)
+    },
+
+    // 更新URl
+    UpdateRedirectRri({ commit }, redirectUri) {
+      commit('update_redirect_uri', redirectUri)
     },
 
     // 获取用户信息
