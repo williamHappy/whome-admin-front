@@ -12,6 +12,7 @@ const user = {
     redirectUri: '',
     authToken: {
       access_token: '',
+      refresh_token: '',
       expires_in: '',
       timestamp: ''
     }
@@ -23,6 +24,12 @@ const user = {
         state.redirectUri = CookieUtil.get(USER.REDIRECT_URI) ? CookieUtil.get(USER.REDIRECT_URI) : 'http://login.paascloud.net'
       }
       return state.redirectUri
+    },
+    getAccessToken: (state) => {
+      if (!state.authToken) {
+        state.authToken = CookieUtil.get(USER.AUTH_TOKEN) ? JSON.parse(CookieUtil.get(USER.AUTH_TOKEN)) : {}
+      }
+      return state.authToken.access_token
     }
   },
 
@@ -77,6 +84,20 @@ const user = {
           reject(error)
         })
       })
+    },
+
+    // 获取access_token
+    GetAccessToken({ commit, state }) {
+      if (!state.authToken || state.authToken.access_token === '') {
+        state.authToken = CookieUtil.get(USER.AUTH_TOKEN) ? JSON.parse(CookieUtil.get(USER.AUTH_TOKEN)) : {}
+      }
+      console.log('refresh_token:', state.authToken.refresh_token)
+      if (state.authToken.access_token) {
+        // 判断是否需要续租
+        if ((new Date().getTime - state.authToken.timestamp) > 100 * 60 * 1000) {
+          // todo 使用refresh_token重新刷新token
+        }
+      }
     },
 
     // 更新token
