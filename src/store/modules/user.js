@@ -1,4 +1,4 @@
-import { login, logout, getInfo } from '@/api/login'
+import { login, logout } from '@/api/login'
 import { getToken, setToken, removeToken } from '@/utils/auth'
 import CookieUtil from '@/utils/cookieUtil.js'
 import { USER } from '@/common/enum'
@@ -96,6 +96,7 @@ const user = {
         // 判断是否需要续租
         if ((new Date().getTime - state.authToken.timestamp) > 100 * 60 * 1000) {
           // todo 使用refresh_token重新刷新token
+          console.log('todo 待使用refresh_token刷新access_token')
         }
       }
     },
@@ -113,19 +114,34 @@ const user = {
     // 获取用户信息
     GetInfo({ commit, state }) {
       return new Promise((resolve, reject) => {
-        getInfo(state.token).then(response => {
-          const data = response.data
-          if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', data.roles)
-          } else {
-            reject('getInfo: roles must be a non-null array !')
-          }
-          commit('SET_NAME', data.name)
-          commit('SET_AVATAR', data.avatar)
-          resolve(response)
-        }).catch(error => {
-          reject(error)
-        })
+        // getInfo(state.token).then(response => {
+        //   const data = response.data
+        //   if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+        //     commit('SET_ROLES', data.roles)
+        //   } else {
+        //     reject('getInfo: roles must be a non-null array !')
+        //   }
+        //   commit('SET_NAME', data.name)
+        //   commit('SET_AVATAR', data.avatar)
+        //   resolve(response)
+        // }).catch(error => {
+        //   reject(error)
+        // })
+        const data = {
+          roles: ['admin'],
+          token: 'admin',
+          introduction: '我是超级管理员',
+          avatar: 'https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif',
+          name: 'Super Admin'
+        }
+        if (data.roles && data.roles.length > 0) { // 验证返回的roles是否是一个非空数组
+          commit('SET_ROLES', data.roles)
+        } else {
+          reject('getInfo: roles must be a non-null array !')
+        }
+        commit('SET_NAME', data.name)
+        commit('SET_AVATAR', data.avatar)
+        resolve(data)
       })
     },
 
