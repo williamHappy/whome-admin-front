@@ -13,7 +13,9 @@
       </div>
     </el-tooltip>
     <el-tooltip :content="$t('login.socialGithub')" effect="light" placement="bottom">
-      <div class="social-btn">
+      <div
+        class="social-btn"
+        @click="GithubLogin">
         <svg-icon icon-class="github" class="icon-social"/>
       </div>
     </el-tooltip>
@@ -45,8 +47,22 @@ export default {
           console.log(err)
         })
     },
+    GithubLogin() {
+      this.$http
+        .get('/social/authorize/github')
+        .then((res) => {
+          // console.log(res)
+          window.location.href = res.data
+        }).catch((err) => {
+          console.log(err)
+        })
+    },
     socialLogin() {
-      const qqKey = CookieUtil.get('SOCIAL_QQKEY')
+      const providerId = CookieUtil.get('PROVIDERID')
+      if (!providerId) {
+        return
+      }
+      const qqKey = CookieUtil.get('SOCIAL_KEY')
       console.log(qqKey)
       if (!qqKey) {
         return
@@ -61,7 +77,7 @@ export default {
           'Content-Type': 'application/x-www-form-urlencoded',
           'deviceId': qqKey
         },
-        url: '/socialLogin/qq',
+        url: '/socialLogin/' + providerId,
         auth: {
           username: 'whome-uac',
           password: 'whomeUacSecret'
