@@ -39,6 +39,9 @@ module.exports = {
       '@': resolve('src')
     }
   },
+  devServer: {
+    　disableHostCheck: true,
+  },
   module: {
     rules: [
       ...(config.dev.useEslint ? [createLintingRule()] : []),

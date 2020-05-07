@@ -1,7 +1,9 @@
 <template>
   <div class="social-container" flex="main: center cross: center">
     <el-tooltip :content="$t('login.socialWechat')" effect="light" placement="bottom">
-      <div class="social-btn">
+      <div
+        class="social-btn"
+        @click="WechatLogin">
         <svg-icon icon-class="wechat" class="icon-social"/>
       </div>
     </el-tooltip>
@@ -36,6 +38,17 @@ export default {
     this.socialLogin()
   },
   methods: {
+    WechatLogin() {
+      this.$http
+        .get('/social/qrconnect/wx')
+        .then((res) => {
+          // console.log(res)
+          window.location.href = res.data
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    },
     QQLogin() {
       this.$http
         .get('/social/authorize/qq')
