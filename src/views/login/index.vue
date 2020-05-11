@@ -68,9 +68,10 @@ export default {
       }
     }
     return {
+      deviceId: '',
       loginForm: {
         username: 'admin',
-        password: 'admin'
+        password: '123456'
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
@@ -102,18 +103,42 @@ export default {
     },
     handleLogin() {
       this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('Login', this.loginForm).then(() => {
-            this.loading = false
-            this.$router.push({ path: this.redirect || '/' })
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
+        // if (valid) {
+        //   this.loading = true
+        //   this.$store.dispatch('Login', this.loginForm).then(() => {
+        //     this.loading = false
+        //     this.$router.push({ path: this.redirect || '/' })
+        //   }).catch(() => {
+        //     this.loading = false
+        //   })
+        // } else {
+        //   console.log('error submit!!')
+        //   return false
+        // }
+        if (!valid) return false
+        this.deviceId = new Date().getTime()
+        this.$http({
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'deviceId': this.deviceId
+          },
+          url: '/auth/form',
+          auth: {
+            username: 'whome-uac',
+            password: 'whomeUacSecret'
+          },
+          params: {
+            username: this.loginForm.username,
+            password: this.loginForm.password,
+            imageCode: this.loginForm.captchaCode
+          }
+        }).then(res => {
+          this.$store.dispatch('UpdateAuthToken', res.data)
+          this.$router.push({ path: this.redirect || '/' })
+        }).catch(err => {
+          this.$message.error(err)
+        })
       })
     }
   }
