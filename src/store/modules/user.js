@@ -50,12 +50,18 @@ const user = {
     // 更新token
     UPDATE_AUTH_TOKEN: (state, authToken) => {
       state.authToken = authToken
-      console.log(authToken)
       const expires = 2 / 24
       CookieUtil.set({
         key: USER.AUTH_TOKEN,
         value: authToken,
         expires: expires
+      })
+    },
+    // 更新token
+    DELETE_AUTH_TOKEN: (state) => {
+      state.authToken = {}
+      CookieUtil.delete({
+        key: USER.AUTH_TOKEN
       })
     },
     // 更新redirectUri

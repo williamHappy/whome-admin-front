@@ -1,9 +1,9 @@
-import Cookies from 'js-cookie'
+// import Cookies from 'js-cookie'
 import CookieUtil from '@/utils/cookieUtil.js'
 import { USER } from '@/common/enum'
 // import store from '@/store'
 
-const TokenKey = 'Admin-Token'
+// const TokenKey = 'Admin-Token'
 
 export function getToken() {
   // return Cookies.get(TokenKey)
@@ -13,9 +13,11 @@ export function getToken() {
 }
 
 export function setToken(token) {
-  return Cookies.set(TokenKey, token)
+  // return Cookies.set(TokenKey, token)
+  return CookieUtil.set(USER.AUTH_TOKEN, token)
 }
 
 export function removeToken() {
-  return Cookies.remove(TokenKey)
+  // return Cookies.remove(TokenKey)
+  return CookieUtil.delete({ key: USER.AUTH_TOKEN })
 }
