@@ -5,10 +5,12 @@ export default {
   login: {
     username: 'username',
     password: 'password',
+    validateCode: 'validateCode',
     login: 'Sign in',
     formValid: {
       nameError: 'Please enter the correct user name',
-      passwordLenError: 'The password can not be less than 5 digits'
+      passwordLenError: 'The password can not be less than 5 digits',
+      codeError: 'Please enter the validate code'
     },
     thirdLoginLabel: 'Third party account login:',
     socialWechat: 'wechat',

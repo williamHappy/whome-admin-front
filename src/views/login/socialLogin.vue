@@ -92,8 +92,8 @@ export default {
         },
         url: '/socialLogin/' + providerId,
         auth: {
-          username: 'whome-uac',
-          password: 'whomeUacSecret'
+          username: 'whome-upms',
+          password: 'whomeUpmsSecret'
         },
         params: {
           code: getUrlParam('code'),

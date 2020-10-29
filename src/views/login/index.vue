@@ -31,6 +31,21 @@
           <svg-icon :icon-class="eye" />
         </span>
       </el-form-item>
+      <el-form-item prop="validateCode">
+        <span class="svg-container">
+          <svg-icon icon-class="form" />
+        </span>
+        <el-input
+          :placeholder="$t('login.validateCode')"
+          v-model="loginForm.validateCode"
+          type="text"
+          name="validateCode"
+          class="input-validate-code"
+          auto-complete="on" />
+        <span class="div-image-code">
+          <img :src="imageCode" :key="imageCodeKey" @click="getImage">
+        </span>
+      </el-form-item>
       <el-form-item>
         <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
           {{ $t('login.login') }}
@@ -71,11 +86,15 @@ export default {
       deviceId: '',
       loginForm: {
         username: 'admin',
-        password: '123456'
+        password: '123456',
+        validateCode: ''
       },
+      imageCode: '',
+      imageCodeKey: '',
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePass }]
+        password: [{ required: true, trigger: 'blur', validator: validatePass }],
+        validateCode: [{ required: true, message: this.$t('login.formValid.codeError'), trigger: 'blur' }]
       },
       loading: false,
       eye: 'closeEye',
@@ -91,6 +110,9 @@ export default {
       immediate: true
     }
   },
+  mounted() {
+    this.getImage()
+  },
   methods: {
     showPwd() {
       if (this.pwdType === 'password') {
@@ -101,43 +123,46 @@ export default {
         this.eye = 'closeEye'
       }
     },
+    getImage() {
+      this.deviceId = new Date().getTime()
+      this.$http({
+        method: 'GET',
+        url: '/auth/code/image',
+        headers: {
+          'deviceId': this.deviceId
+        }
+      }).then((res) => {
+        this.imageCode = 'data:image/jpg;base64,' + res.data
+        this.imageCodeKey = new Date().getTime()
+      })
+    },
     handleLogin() {
+      const deviceId = this.deviceId
       this.$refs.loginForm.validate(valid => {
-        // if (valid) {
-        //   this.loading = true
-        //   this.$store.dispatch('Login', this.loginForm).then(() => {
-        //     this.loading = false
-        //     this.$router.push({ path: this.redirect || '/' })
-        //   }).catch(() => {
-        //     this.loading = false
-        //   })
-        // } else {
-        //   console.log('error submit!!')
-        //   return false
-        // }
         if (!valid) return false
         this.deviceId = new Date().getTime()
         this.$http({
           method: 'POST',
           headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'deviceId': this.deviceId
+            'deviceId': deviceId
           },
           url: '/auth/form',
           auth: {
-            username: 'whome-uac',
-            password: 'whomeUacSecret'
+            username: 'whome-upms',
+            password: 'whomeUpmsSecret'
           },
           params: {
             username: this.loginForm.username,
             password: this.loginForm.password,
-            imageCode: this.loginForm.captchaCode
+            imageCode: this.loginForm.validateCode
           }
         }).then(res => {
           this.$store.dispatch('UpdateAuthToken', res.data)
           this.$router.push({ path: this.redirect || '/' })
+        // eslint-disable-next-line handle-callback-err
         }).catch(err => {
-          this.$message.error(err)
+          this.getImage()
         })
       })
     }
@@ -169,6 +194,9 @@ $light_gray:#eee;
       }
     }
   }
+  .input-validate-code{
+    width: 67%;
+  }
   .el-form-item {
     border: 1px solid rgba(255, 255, 255, 0.1);
     background: rgba(0, 0, 0, 0.1);
@@ -196,6 +224,9 @@ $light_gray:#eee;
     max-width: 100%;
     padding: 35px 35px 15px 35px;
     margin: 120px auto;
+  }
+  .div-image-code {
+    margin: 0px auto 20px auto;
   }
   .third-login-label {
     font-size: 14px;

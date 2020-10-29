@@ -5,10 +5,12 @@ export default {
   login: {
     username: '账号',
     password: '密码',
+    validateCode: '验证码',
     login: '登录',
     formValid: {
       nameError: '请输入正确的用户名',
-      passwordLenError: '密码不能小于5位'
+      passwordLenError: '密码不能小于5位',
+      codeError: '请输入验证码'
     },
     thirdLoginLabel: '第三方账号登录：',
     socialWechat: '微信',
